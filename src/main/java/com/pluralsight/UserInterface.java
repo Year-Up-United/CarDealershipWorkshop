@@ -10,6 +10,8 @@ public class UserInterface {
     //call the appropriate Dealership method and then display the vehicles it
     //returns.)
 
+    DealershipFileManager dfm = new DealershipFileManager();
+
     private Dealership dealership;
 
     public UserInterface() {
@@ -87,6 +89,7 @@ public class UserInterface {
                     break;
                 case 10:
                     sellOrLeaseVehicle();
+                    break;
                 case 99:
                     System.out.println("Exiting...");
                     return; //exit the loop and end the program
@@ -146,7 +149,8 @@ public class UserInterface {
 
         ContractDataManager.saveContract(contract);
         dealership.removeVehicle(vehicle);
-        DealershipFileManager.saveDealership(dealership);
+
+        dfm.saveDealership(dealership);
         System.out.println("Contract saved and vehicle removed from inventory.");
     }
 
@@ -260,7 +264,7 @@ public class UserInterface {
         Vehicle newVehicle = new Vehicle(vin, year, make, model, type, color, odometer, price);
         dealership.addVehicle(newVehicle);
 
-        DealershipFileManager.saveDealership(dealership);
+        dfm.saveDealership(dealership);
 
         System.out.println("Vehicle added successfully.");
     }
